@@ -1,0 +1,26 @@
+
+ASSIGNMENT:
+    Select a controversial public issue. Try to occupy and communicate sympathetically the different positions on that issue. Don't try to reconcile the positions or advocate for a position. Instead, try to inhabit each position
+    as if it were your own.
+GOAL:
+    Your audience should have a clear understanding of what is at stake in the controversy, the depth of the divisions, and your commitment to seeing the issue from different perspectives.
+CONTENT BASED REQUIREMENTS:
+    1. Identify a controversial public issue.
+    2. Bring out the inherent issues of the controversy. Inherent issues are what audiences need/expect you to address at the heart of a controversy. There are often 2-4.
+    3. Communicate specifically who represents the different sides of the debate -- experts, advocacy groups, or everyday people, and what their interest is.
+    4. Conclude the speech with a claim that identifies the point of stasis in this controversy for the perspectives surveyed. Where, in other words, is this controversy balanced now?
+FORMAL REQUIREMENTS:
+    1. Must be roughly 5 minutes long. No shorter than 4:30 and no longer than 5:30.
+    2. Must have a clear clain in intro about the discourse surrounding the controversy and a "map" of your speech. Use the map to guide audience through structure of the speech and give verbal cues so they dont get lost
+    3. Speech must be logically organized using either the "bloc" or "alternating" patterns of organization.
+    4. Provide legitimate support for claims made through verbally cited source work. Provide enough source info so that an audience can easily find it on their own (author, date, & publication in which it appeared).
+
+Topic: The Debate Over Mass Surveillance in the United States
+
+Sympathetic Perspectives Claim: "Americans are divided about how their privacy and security is balanced in the digital age."
+
+    Perspective 1: We believe that mass surveillance is a necessary tool to ensure national security and prevent terrorist attacks, cybercrime, and other threats. Government programs like those run by the NSA
+                   play a critical role in prevention. Citizens who are not engaging in illegal activity have nothing to hide or fear.
+
+    Perspective 2: We believe that mass surveillance is a fundamental violation of privacy rights and opens the door to government overreach and abuse. Privacy is essential for a free society, and security should not come at its expense.
+    

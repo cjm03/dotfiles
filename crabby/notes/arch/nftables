@@ -1,0 +1,5 @@
+Uninstall iptables and install nftables:
+    sudo pacman -S iptables-nft
+binary (nft) is stored in /usr/bin/nft
+service (nftables.service) is stored in /usr/lib/systemd/system/nftables.service
+

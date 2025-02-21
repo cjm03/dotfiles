@@ -1,0 +1,7 @@
+[user]
+	name = cjmoye
+	email = cjmoye@iu.edu
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false

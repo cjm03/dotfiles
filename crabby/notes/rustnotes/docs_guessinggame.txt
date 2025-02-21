@@ -1,0 +1,210 @@
+# Programming a Guessing Game
+
+  This introduces you to a few common Rust concepts by showing you how to use them in a real program.
+  You'll learn about 'let', 'match', methods, associated functions, external crates, and more
+  The Program:
+    The program will generate a random number between 1 and 100
+    It will then prompt the user to enter a guess
+    After the guess is entered, the program will indicate whether the guess is too high or too low
+    If the guess is correct, the game prints a congratulatory message and then exits
+
+  ## Setting Up a New Project
+    Use Cargo to make:
+      $ cargo new guessing_game
+      $ cd guessing_game
+    Compile and run:
+      $ cargo run
+    Open src/main.rs and write the following:
+      -----------------------------------------
+      use std::io;
+      
+      fn main() {
+          println!("Guess the number!");
+
+          println!("Please input your guess.");
+
+          let mut guess = String::new();
+
+          io::stdin()
+              .read_line(&mut guess)
+              .expect("Failed to read line");
+
+          println!("You guessed: {}", guess);
+      }
+      -----------------------------------------
+    To obtain user input and then print the result as output, we need to bring the 'io' input/output library into scope
+      The 'io' library comes from the standard library, known as 'std':
+        'use std::io;'
+      By default, Rust has a set of items defined in the standard library that it brings into the scope of every program
+      This set is called the prelude, and you can see everything in it in the standard library documentation
+      If a type you want to use isnt in the prelude, you have to bring that type into scope explicitly with a 'use' statement
+      Using the 'std::io' library provides a number of useful features, including the ability to accept user input
+    Again, the 'main' function is the entry point into the program
+      -----------
+      fn main() {
+      -----------
+      The 'fn' syntax declares a new function
+      The parentheses indicate there are no parameters
+      The curly bracket starts the body of the function
+    Again, 'println!' is a macro that prints a string to the screen
+      This code is printing a prompt stating what the game is and requesting input from the user
+  ## Storing Values with Variables
+    Next, we created a variable to store the user input:
+      ------------------------------
+      let mut guess = String::new();
+      ------------------------------
+      The 'let' statement creates the variable
+        example: 'let apples = 5;', this creates variable 'apples' and binds it to the value 5
+      In Rust, variables are immutable by default, meaning once we give the variable a value, the value won't change
+      To make a variable mutable, we add 'mut' before the variable name
+    Recap: 
+      'let mut guess' introduces a mutable variable named guess
+      '=' tells Rust we want to bind something to the variable now
+      On the right side of the '=' is the value that 'guess' is bound to, which is the result of calling 'String::new'
+        'String::new' is a function that returns a new instance of a 'String'
+          'String' is a string type provided by the std library that is a growable, UTF-8 encoded bit of text
+      The '::' syntax in the '::new' line indicates that new is an associated function of the 'String' type
+      An associated function is a function that is implemented on a type, in this case 'String'
+      This 'new' function creates a new empty string
+        Youll find a 'new' function on many types because its a common name for a function that makes a new value of some kind
+  ## Receiving User Input
+    We included input/output functionality from the std library with 'use std::io;'
+    Now we call the 'stdin' function from the 'io' module, which will allow us to handle user input:
+      --------------------------
+      io::stdin()
+          .read_line(&mut guess)
+      --------------------------
+      If we hadnt imported the 'io' library, we could still use the function by writing this function call as 'std::io::stdin'
+        The 'stdin' function returns an instance of 'std::io::Stdin' which is a type that represents a handle to the std input for your terminal
+      The second line above calls the 'read_line' method on the std input handle to get input from the user
+        We also pass '&mut guess' as the argument to 'read_line' to tell it what string to store the user input in
+        The full job of 'read_line' is to take whatever the user types into stdin and append that into a string (not overwrite)
+          So we therefore pass that string as an argument
+          ** the string argument NEEDS TO BE MUTABLE so the method can change the strings content **
+        The '&' indicates that this argument is a reference, which gives you a way to let multiple parts of your code access one piece of data without needing to copy that data into memory multiple times
+        References are a complex feature, and one of Rust's major advantages is how safe and easy it is to use references
+        For now, all you need to know is that like variables, references are immutable by default
+  ## Handling Potential Failure with Result
+      -------------------------------
+      .expect("Failed to read line");
+      -------------------------------
+    This is still apart of the 'io::stdin()' function
+    The whole function *could* have been written as:
+      ----------------------------------------------------------------
+      io::stdin().read_line(&mut guess).expect("Failed to read line");
+      ----------------------------------------------------------------
+    However, one long line is difficult to read so its best to divide it
+    Its often wise to introduce a newline and other whitespace to help break up long lines when calling a method with '.method_name()' syntax
+    Again, 'read_line' puts whatever the user enters into the string we pass to it
+      But, it also returns a 'Result' value
+      'Result' is an enumeration, often called an enum, which is a type that can be in one of multiple possible states
+        We call each possible state a variant
+      The purpose of these 'Result' types is to encode error-handling information
+      'Result' variants are 'Ok' and 'Err'
+        The 'Ok' variant indicates the operation was successful, and inside 'Ok' is the successfully generated value
+        The 'Err' variant means the operation failed, and 'Err' contains info about how or why the operation failed
+      Values of the 'Result' type, like values of any type, have methods defined on them
+      An instance of 'Result' has an 'expect' method that you can call
+        If this instance of 'Result' is 'Err', 'expect' causes the program to crash and displays the message passed as the argument
+        If the 'read_line' method returns an 'Err', it would likely be the result of an error coming from the underlying OS
+        If the 'Result' is an 'Ok' value, 'expect' takes that value and returns it to you so you can use it
+          In this case, that value is the number of bytes in the users input
+        If you dont call 'expect', the program will compile but youll get a warning
+  ## Printing Values with 'println!' Placeholders
+      -----------------------------------
+      println!("You guessed: {}", guess);
+      -----------------------------------
+    The curly brackets are the placeholder and they are replaced with guess when the line executes
+  ## Testing the First Part
+    Let's test the first part of the guessing game:
+      $ cargo run
+      It works!
+  ## Generating a Secret Number
+    Rust doesn't yet include random number functionality in its std library
+    However, the Rust team does provide a 'rand' crate with said functionality
+  ## Using a Crate to Get More Functionality
+    Remember that a crate is a collection of Rust source code files
+    The project weve been building is a binary crate, which is an executable
+    The 'rand' crate is a library crate, which contains code that is intended to be used in other programs and cant be executed on its own
+    Before we can write code that uses 'rand', modify the Cargo.toml file to include the 'rand' crate as a dependency:
+      [dependencies]
+      rand = "0.8.5"
+    This specifies the 'rand' crate with the semantic version specifier '0.8.5'
+      The specifier '0.8.5' is actually shorthand for '^0.8.5'
+        This means any version that is at least 0.8.5 but below 0.9.0
+    Now without changing any of the code, build:
+      $ cargo build
+    When we include an external dependency, Cargo fetches the latest versions of everything the dependency needs from the registry
+      The registry is a copy of data from Crates.io
+      Crates.io is where people in the Rust ecosystem post their open source Rust projects for others to use
+  ## Generating a Random Number
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

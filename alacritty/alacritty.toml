@@ -1,0 +1,37 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/catppuccin_macchiato.toml"
+]
+
+[colors.primary]
+background = "#000000"
+
+[colors]
+transparent_background_colors = true
+draw_bold_text_with_bright_colors = false
+
+[env]
+
+[window]
+padding.x = 10
+padding.y = 10
+
+decorations = "Full"
+
+opacity = 0.75
+blur = true
+dynamic_padding = true
+
+[mouse]
+hide_when_typing = true
+
+[font.normal]
+family = "IosevkaTerm Nerd Font Mono"
+
+[font]
+size = 14
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+
+

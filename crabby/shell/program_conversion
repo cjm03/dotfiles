@@ -1,0 +1,9 @@
+# CLI Commands Worth Remembering
+
+## Converting to assembly
+  objdump: '$ objdump -d <filename>' // This should be used only when <filename> is an executable binary ie; after compiling file such as main.rs with '$ rustc main.rs' which produces an executable binary, main
+  rustc: '$ rustc --emit asm <filename.rs>' // This should only be used when <filename.rs> is a non-executable file, ie; pre-compile time
+
+## GCC
+  gcc: '$ gcc <filename.c> -o <filename>' // Compiles the <filename.c> into <filename> which is an executable binary
+  gcc: '$ gcc -Wall -save-temps <filename.c> -o <filename>' // Compiles the '.c' traditionally, but also saves the preprocessed output as '.i', saves the intermediate compiled output file as '.s', and saves machine-level instructions as '.o'

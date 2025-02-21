@@ -1,0 +1,185 @@
+# Rust Notes
+
+## 1. Install
+  Installing on Linux:
+    $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+  Will ask for how you want to configure, I chose default
+  Exit terminal and reopen, then run:
+    $ rustc --version
+  ### Updating
+    $ rustup update
+  ### Uninstalling
+    $ rustup self uninstall
+  ### Accessing documentation - opens in browser
+    $ rustup doc
+
+## 2. Hello, world!
+  Created a rusts/ directory in ~/projects
+  Created a hello_world/ directory in rusts/
+  Created main.rs and wrote the program to print "Hello, world!"
+    Rust files always end with the .rs extension
+  Compile the file:
+    $ rustc main.rs
+  Run the file:
+    $ ./main
+    "Hello, world!"
+  Congrats, first rust program...
+  ### Anatomy of a Rust Program
+    -----------
+    fn main() {
+
+    }
+    -----------
+    These lines define a function named 'main'
+    The 'main' function is special, it is always the first code that runs in every executable Rust program
+    The parentheses following main specify parameters, in this case there are none
+    The function body is wrapped in {}
+    Rust requires curly brackets around all function bodies
+    It's good style to place the opening curly bracket on the same line as the function declaration, separated by one space
+    --------------------------
+    println!("Hello, world!");
+    --------------------------
+    This is the body of the 'main' function
+    This line does all the work in this little program: prints text to the screen
+    There are **4** important details here
+    1. 
+      Rust style is to indent with four spaces, not a tab
+        (two tabs in current nvim config)
+    2. 
+      'println!' calls a Rust macro
+      If it had called a function instead, it would be entered as println (without the '!')
+      For now, note that using a '!' means you're calling a macro instead of a normal function
+      Macros don't always follow the same rules as functions
+    3. 
+      You see the "Hello, world!" string.
+      We pass this string as an argument to 'println!', and the string is printed to the string.
+    4. 
+      We end the line with a semicolon (;), which indicates the expression is over and the next one is ready to begin
+      Most lines of Rust code end with a semicolon
+  ### Compiling and Running are Separate Steps
+    Before you can run a Rust program, you must compile it using the Rust compiler
+
+## 3. Hello, Cargo! (build system and package manager)
+  Cargo is Rust's build system and package manager
+  Most Rustaceans use this tool to manage their Rust projects because Cargo handles a lot of tasks, such as:
+    1. Building your code
+    2. Downloading the libraries your code depends on
+    3. Building those libraries
+    * those libraries that your code needs are called dependencies *
+  The simplest Rust programs, such as our "Hello, world!", don't have any dependencies
+  Check cargo version:
+    $ cargo --version
+  ### Creating a Project with Cargo
+    Navigating back to ~/projects/rusts, create a new project with cargo:
+      $ cargo new hello_cargo
+      $ cd hello_cargo
+    The first command created a new directory and project called hello_cargo
+    Cargo has generated a file and a directory in hello_cargo:
+      hello_cargo
+      |_ Cargo.toml
+      |_src
+        |_main.rs
+    Cargo has also generated a file inside the src/ directory, called main.rs
+    It has also initialized a new Git repo along with a .gitignore file
+    Git files wont be generated if you run '$ cargo new' within an existing Git repo
+      You can override this behavior by using '$ cargo new --vcs=git'
+    Opening Cargo.toml shows the configuration for Cargo in the project
+      The file is in the TOML (Toms Obvious, Minimal Language) format, which is Cargos configuration format
+    The first line, '[package]', is a section heading that indicates that the following statements are configuring a package
+    The next three lines set the config information Cargo needs to compile the program:
+      'name = "hello_cargo"'
+      'version = "0.1.0"'
+      'edition = "2021"'
+    The last line, '[dependencies]', is the start of a section for you to list any of your projects dependencies
+      In Rust, packages of code are referred to as 'crates'
+
+    Now open src/main.rs:
+      ------------------------------
+      fn main() {
+          println!("Hello, world!");
+      }
+      ------------------------------
+    Cargo has generated the same "Hello, world!" program we just wrote
+    The difference is, Cargo placed the code in the src/ directory 
+    Cargo expects your source files to live inside the src/ directory
+    The top-level project directory is just for README files, license info, config files, and anything else that is not code
+    If you start a project that doesn't use cargo, move the project code into the src/ directory and create a Cargo.toml file
+  ### Building and Running a Cargo Project
+    Build the hello_cargo project, in the hello_cargo directory:
+      $ cargo build
+    This creates an executable in target/debug/hello_world rather than in the current directory
+    Because the default build is a debug build, Cargo puts the binary in a directory called debug/
+    Run the executable with:
+      $ ./target/debug/hello_cargo
+      Hello, world!
+    Running '$ cargo build' for the first time also causes Cargo to create a new file 'Cargo.lock'
+      This file keeps track of the exact versions of dependencies in your project
+      You won't ever need to change this file manually, cargo manages its contents for you
+    You can also compile the code and run the resultant executable in one command:
+      $ cargo run
+    This is more convenient, so most developers use '$ cargo run'
+    You can also use this command to quickly check your code to make sure it compiles but doesnt produce an executable:
+      $ cargo check
+      It is smart to run '$ cargo check' periodically as you write to make sure it compiles
+      Then use '$ cargo build' when youre ready to use the executable
+  ### Building for Release
+    When your project is finally ready for release, use this command to compile it:
+      $ cargo build --release
+      This compiles the code with optimizations
+      This also creates an executable in 'target/release/' instead of 'target/debug/'
+      The optimizations make your Rust code run faster, but turning them on lengthens the time it takes to compile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
